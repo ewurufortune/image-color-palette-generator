@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Top Colors Finder</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background-color: #f9f9f9;
+			font-family: 'Arial', sans-serif;
+		}
+
+		header, form, main {
+			margin: auto;
+			width: 70%;
+			padding: 20px;
+			background-color: #3498db;
+			color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			margin-top: 30px;
+		}
+
+		header h1 {
+			font-size: 2.5rem;
+			margin-bottom: 20px;
+		}
+
+		header p {
+			font-size: 1.2rem;
+			line-height: 1.5;
+			color: #ecf0f1;
+		}
+
+		form {
+			background-color: #2ecc71;
+			padding: 20px;
+			border-radius: 10px;
+			margin-top: 20px;
+		}
+
+		input {
+			margin: 10px 0;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+		}
+
+		input[type='submit'] {
+			background-color: #27ae60;
+			color: #fff;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		main {
+			padding: 20px;
+			margin-top: 20px;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+
+		.pair {
+			flex: 0 0 48%;
+			margin-bottom: 20px;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
+
+		.color-box {
+			height: 80px;
+			text-align: center;
+			line-height: 80px;
+			color: #333;
+		}
+
+		.color-box-value {
+			height: 60px;
+			text-align: center;
+			padding: 10px;
+			color: #555;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Image Colour Palette Generator by Fortune</h1>
+		<p>
+			Upload an image, and this site will tell you the top 10 most used colors along with their hex codes.
+			If two colors appear the same number of times, both will be shown here.
+		</p>
+	</header>
+	<form action="/" method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" required />
+		<br>
+		Select a Colour Code:
+		<input type="radio" name="colour_code" value="rgb" required>RGB
+		<input type="radio" name="colour_code" value="hex">Hex
+		<br>
+		<input type="submit" />
+	</form>
+
+	<main>
+		{% for i in range(colors_list|length) %}
+			<div class="pair">
+				<div class="color-box" style="background-color: rgb{{ colors_list[i] }};">rgb{{ colors_list[i] }}</div>
+				<div class="color-box-value"> {{ i+1 }}: #{{ colors_list[i] }}</div>
+			</div>
+		{% endfor %}
+	</main>
+</body>
+</html>
